@@ -19,26 +19,39 @@ def prihlasit(function):
 
 
 @app.route("/", methods=["GET"])
-def index():
-    return render_template("base.html.j2")
+def scitani():
+    a = request.args.get("a")
+    b = request.args.get("b")
+    try:
+        c = int(a) + int(b)
+    except (TypeError, ValueError):
+        c = ""    
+    return render_template("scitani.html.j2", c=c)
 
 
-@app.route("/info/")
-def info():
-    return render_template("info.html.j2")
 
 
-@app.route("/abc/")
-def abc():
-    return render_template("abc.html.j2", slova=slova)
+@app.route("/odecitani/")
+def odecitani():
+    x = request.args.get("x")
+    y = request.args.get("y")
+    try:
+        z = int(x) - int(y)
+    except (TypeError, ValueError):
+        z = ""    
+    return render_template("odecitani.html.j2", z=z)
+    
 
 
-@app.route("/text/")
-def text():
-    return """
+@app.route("/nasobeni/")
+def nasobeni():
+    m = request.args.get("m")
+    v = request.args.get("v")
+    try:
+        e = int(m) * int(v)
+    except (TypeError, ValueError):
+        e = ""    
+    return render_template("nasobeni.html.j2", e=e)
 
-<h1>Text</h1>
 
-<p>toto je text</p>
 
-"""
