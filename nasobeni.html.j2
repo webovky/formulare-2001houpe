@@ -1,0 +1,62 @@
+
+
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<title>{%block title%}Násobení{%endblock%}</title>
+</head>
+<div>
+<p class="userinfo">
+{% if 'user' in session %}
+  Uživatel: {{session['user']}}
+{% else %}
+  Nikdo není přihlášen
+{% endif %}
+</p>
+
+<p class="logout">
+<a href="{{ url_for('logout') }}">Logout</a>
+</p>
+
+{% for category, message in get_flashed_messages(with_categories=true) %}
+  <p class="userinfo {{ category }}">{{ message }}</p>
+{% endfor %}
+
+</div>
+<a href="https://cs.wikipedia.org/wiki/N%C3%A1soben%C3%AD"><img src="{{ url_for('static', filename='nasobeni.png') }}" /></a>
+<nav>
+<ul>
+    <li><a href="{{ url_for('scitani') }}">Sčítání</a></li>
+    <li><a href="{{ url_for('odecitani') }}">Odečítání</a></li>
+    <li><a href="{{ url_for('nasobeni') }}">Násobení</a></li>
+    <li><a href="{{ url_for('login') }}">Login</a></li>
+    
+    
+</ul></nav>
+
+{% block obsah %}
+
+<h1>Násobení</h1>
+
+<form method = "get">
+<input type = 'text', name = 'm', value = '', placeholder = 'Číslo m'>
+*
+<input type = 'text', name = 'v', value = '', placeholder = 'Číslo v'>
+<input type = 'submit', name = 'vynasob', value = 'Vynásob!'>
+</form>
+<p>Výsledek : {{e}}</p>
+<a href="http://127.0.0.1:54321/nasobeni/">Vymazat výsledek </a>
+
+{% endblock obsah %}
+
+<footer>
+{#{% filter markdown %}#}
+Užitečné odkazy: 
+
+* <a href="https://www.jakpsatweb.cz/html/">HTML</a>, 
+* <a href="https://www.jakpsatweb.cz/css/">CSS</a>, 
+* <a href="http://docs.python.org">Python</a>, 
+* <a href="https://flask.palletsprojects.com/">Flask</a>, 
+* <a href="https://jinja.palletsprojects.com/templates/">Jinja2</a>
+
+{#{% endfilter %}#}
+</footer>
